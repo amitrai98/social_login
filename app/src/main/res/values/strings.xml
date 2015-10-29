@@ -4,4 +4,30 @@
     <!--<string name="facebook_app_id">1483508201978567</string>-->
     <string name="facebook_app_id">563728850423908</string>
 
+
+    //login activity
+    <string name="btn_login">Login</string>
+    <string name="btn_signup">Register</string>
+    <string name="btn_facebook_login">Facebook Login</string>
+    <string name="btn_google_login">Google+ Login</string>
+
+    //main menu fragment
+    <string name="btn_online_practice_test">Online Practice Test</string>
+    <string name="btn_notification">Notifications</string>
+    <string name="btn_about_us">About Us</string>
+    <string name="btn_contact_us">Contact Us</string>
+
+    // activity main menu
+    <string name="option">Options</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google+</string>
+    <string name="twitter">Twitter</string>
+    <string name="website">Website</string>
+    <string name="phone_no">Phone Number</string>
+    <string name="share_app">Share App</string>
+    <string name="logout">Logout</string>
+
+
+
+
 </resources>

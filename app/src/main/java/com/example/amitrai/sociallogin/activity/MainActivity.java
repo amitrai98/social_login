@@ -1,4 +1,4 @@
-package com.example.amitrai.sociallogin;
+package com.example.amitrai.sociallogin.activity;
 
 import android.content.IntentSender;
 import android.content.pm.PackageInfo;
@@ -15,6 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.amitrai.sociallogin.R;
+import com.example.amitrai.sociallogin.fragments.Fragment_Menu;
+import com.example.amitrai.sociallogin.util.AppLoger;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -56,8 +59,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.container, new Fragment_Menu())
+//                .addToBackStack(Fragment_Menu.class.getSimpleName())
+//                .commit();
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -69,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
 
 
-        callbackManager = CallbackManager.Factory.create();
+//        callbackManager = CallbackManager.Factory.create();
 
 
 
@@ -79,16 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                .addScope(Plus.SCOPE_PLUS_LOGIN).build();
 
 
-        linkXml();
+//        linkXml();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override

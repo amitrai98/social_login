@@ -1,4 +1,4 @@
-package com.example.amitrai.sociallogin;
+package com.example.amitrai.sociallogin.util;
 
 import android.util.Log;
 

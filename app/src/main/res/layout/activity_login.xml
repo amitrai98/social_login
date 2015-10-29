@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/layout_login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="attemptLogin"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/btn_login"/>
+
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:onClick="signUp"
+            android:layout_marginTop="10dp"
+            android:text="@string/btn_signup"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_social"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_google"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="googleLogin"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/btn_facebook_login"/>
+
+        <Button
+            android:id="@+id/btn_facebook"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="facebookLogin"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/btn_google_login"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
