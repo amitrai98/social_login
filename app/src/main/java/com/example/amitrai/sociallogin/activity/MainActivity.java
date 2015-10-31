@@ -5,10 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -16,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.amitrai.sociallogin.R;
-import com.example.amitrai.sociallogin.fragments.Fragment_Menu;
 import com.example.amitrai.sociallogin.util.AppLoger;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -108,8 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * initialing views
      */
     private void linkXml(){
-        btn_facebook = (com.facebook.login.widget.LoginButton) findViewById(R.id.facebook);
-        btn_google = (com.google.android.gms.common.SignInButton) findViewById(R.id.google);
+//        btn_facebook = (com.facebook.login.widget.LoginButton) findViewById(R.id.facebook);
+//        btn_google = (com.google.android.gms.common.SignInButton) findViewById(R.id.google);
 
 //        btn_facebook.setOnClickListener(this);
         btn_google.setOnClickListener(this);
@@ -194,11 +190,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.facebook){
-            validateFacebookLogin();
-        }else if (v.getId() == R.id.google){
-            validateGoogleLogin();
-        }
+//        if(v.getId() == R.id.facebook){
+//            validateFacebookLogin();
+//        }else if (v.getId() == R.id.google){
+//            validateGoogleLogin();
+//        }
     }
 
     @Override

@@ -11,19 +11,44 @@
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:layout_marginLeft="50dp"
+        android:layout_centerVertical="true"
+        android:gravity="center"
         android:layout_marginRight="50dp">
+
+
+
+        <EditText
+            android:id="@+id/edt_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:imeOptions="actionNext"/>
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:layout_marginTop="10dp"
+            android:imeOptions="actionDone"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:inputType="textPassword"/>
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:onClick="attemptLogin"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
             android:text="@string/btn_login"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -27,6 +27,21 @@
     <string name="share_app">Share App</string>
     <string name="logout">Logout</string>
 
+    // login activity
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //question fragment
+    <string name="test_header">Test Header</string>
+    <string name="question_no">1 of 60</string>
+    <string name="answer_option">Option </string>
+    <string name="next">Next</string>
+    <string name="hint">Hint</string>
+
+
 
 
 
