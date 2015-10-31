@@ -9,8 +9,6 @@ import android.widget.Button;
 import com.example.amitrai.sociallogin.R;
 import com.example.amitrai.sociallogin.util.AppLoger;
 
-import java.util.logging.Logger;
-
 /**
  * Created by cynogen on 25/10/15.
  */
@@ -28,6 +26,8 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         btn_loging = (Button) findViewById(R.id.btn_login);
+
+        startActivity(new Intent(LoginActivity.this, Activity_MainMenu.class));
 
         btn_loging.setOnClickListener(new View.OnClickListener() {
             @Override

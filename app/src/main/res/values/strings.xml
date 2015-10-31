@@ -37,10 +37,30 @@
     //question fragment
     <string name="test_header">Test Header</string>
     <string name="question_no">1 of 60</string>
-    <string name="answer_option">Option </string>
+    <string name="answer_option_one">Option 1</string>
+    <string name="answer_option_two">Option 2</string>
+    <string name="answer_option_three">Option 3</string>
+    <string name="answer_option_four">Option 4</string>
     <string name="next">Next</string>
     <string name="hint">Hint</string>
+    <string name="demo_questoin">Question 1 - what was the strengh of rss in 2014 ?</string>
 
+    // result fragment
+    <string name="result">Result</string>
+    <string name="right_answer">Right Answers - 20</string>
+    <string name="wrong_answers">Wrong Answers - 40</string>
+    <string name="main_menu">Main Menu</string>
+
+
+    // about us
+    <string name="about_us">About Us</string>
+    <string name="about_us_message"> We are a growing and committed team of orthoproners who can work on the ideas,
+        dedicated to excellence in technical care, research and developement. </string>
+
+    //contact us
+    <string name="contact_us">Contact Us</string>
+    <string name="contact_hint_msg">contact us on our official website www.test.com \n
+    or wirite to us at mail.test.com \n or you can reach us at 1800 205 123</string>
 
 
 
