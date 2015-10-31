@@ -49,7 +49,7 @@ public class NavigationAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(view == null){
-            view = inflater.inflate(R.layout.cell_drawer_menu,null);
+            view = inflater.inflate(R.layout.design_test,null);
             holder = new Holder();
             holder.textView = (TextView) view.findViewById(R.id.txt_option);
             view.setTag(holder);
