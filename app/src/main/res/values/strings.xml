@@ -37,9 +37,13 @@
     //question fragment
     <string name="test_header">Test Header</string>
     <string name="question_no">1 of 60</string>
-    <string name="answer_option">Option </string>
+    <string name="answer_option_one">Option 1</string>
+    <string name="answer_option_two">Option 2</string>
+    <string name="answer_option_three">Option 3</string>
+    <string name="answer_option_four">Option 4</string>
     <string name="next">Next</string>
     <string name="hint">Hint</string>
+    <string name="demo_questoin">Question 1 - what was the strengh of rss in 2014 ?</string>
 
 
 
