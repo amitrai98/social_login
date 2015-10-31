@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.amitrai.sociallogin.R;
+
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ public class NotificationAdapter extends BaseAdapter{
     private LayoutInflater inflater = null;
     private Activity activity = null;
     private List<String> list_notification = null;
+    private Holder holder = null;
 
 
     public NotificationAdapter(Activity activity, List<String> list_notification){
@@ -46,10 +49,14 @@ public class NotificationAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(view == null){
+            view = inflater.inflate(R.layout.design_test,null);
+            holder = new Holder();
+            holder.textView = (TextView) view.findViewById(R.id.txt_option);
+            view.setTag(holder);
+        }else
+            holder = (Holder) view.getTag();
 
-        }else {
 
-        }
         return view;
     }
 
