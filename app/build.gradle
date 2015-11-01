@@ -26,5 +26,8 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile 'com.google.android.gms:play-services-plus:8.1.0'
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
+    compile('com.mikepenz:materialdrawer:4.4.2@aar') {
+        transitive = true
+    }
 
 }

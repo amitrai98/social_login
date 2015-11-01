@@ -13,18 +13,8 @@
     tools:showIn="@layout/activity_main"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_centerInParent="true" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/google" android:text="google" android:gravity="center"
-            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight=".5"/>
-
-        <com.facebook.login.widget.LoginButton
-            android:layout_gravity="center"
-            android:id="@+id/facebook"  android:text="facebook" android:gravity="center"
-            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight=".5"/>
-
-
-    </LinearLayout>
+    <TextView
+        android:text="Hello World!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>
