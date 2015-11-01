@@ -63,8 +63,8 @@
     or wirite to us at mail.test.com \n or you can reach us at 1800 205 123</string>
 
     <string name="notification_msg">notificaton message</string>
-
-
+    <string name="empty_error">field can\'t be empty</string>
+    <string name="invalid_email">Invalid email</string>
 
 
 </resources>

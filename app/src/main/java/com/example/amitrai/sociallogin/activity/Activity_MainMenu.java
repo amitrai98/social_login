@@ -8,11 +8,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ListView;
 
+
 import com.example.amitrai.sociallogin.R;
 import com.example.amitrai.sociallogin.adapters.NavigationAdapter;
 import com.example.amitrai.sociallogin.fragments.Fragment_Menu;
-import com.example.amitrai.sociallogin.fragments.QuestionFragment;
-import com.example.amitrai.sociallogin.fragments.ResultFragment;
+
+import com.example.amitrai.sociallogin.fragments.SignUpFragment;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -202,7 +203,7 @@ public class Activity_MainMenu extends ActionBarActivity{
     private void openMenuFragment(){
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container, new ResultFragment())
+                .add(R.id.container, new SignUpFragment())
                 .addToBackStack(Fragment_Menu.class.getSimpleName())
                 .commit();
     }
