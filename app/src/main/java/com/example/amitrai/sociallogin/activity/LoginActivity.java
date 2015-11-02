@@ -1,5 +1,6 @@
 package com.example.amitrai.sociallogin.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -8,6 +9,8 @@ import com.example.amitrai.sociallogin.R;
 import com.example.amitrai.sociallogin.fragments.AppLoginFragment;
 import com.example.amitrai.sociallogin.fragments.SignUpFragment;
 import com.example.amitrai.sociallogin.util.AppLoger;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginFragment;
 
 /**
@@ -18,6 +21,8 @@ public class LoginActivity extends ActionBarActivity {
     // tag to be logged
     private String TAG = LoginActivity.class.getSimpleName();
 
+    public static CallbackManager callbackManager ;
+
 
 
     @Override
@@ -25,7 +30,11 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        FacebookSdk.sdkInitialize(this);
+        callbackManager = CallbackManager.Factory.create();
+
         openLoginFragment();
+
     }
 
     /**
@@ -51,6 +60,11 @@ public class LoginActivity extends ActionBarActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
 
     /**
      * Opens signup dialog

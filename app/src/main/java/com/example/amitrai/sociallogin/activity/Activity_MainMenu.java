@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.amitrai.sociallogin.R;
@@ -35,7 +34,7 @@ public class Activity_MainMenu extends ActionBarActivity{
     private NavigationAdapter adapter = null;
     private List<String> options_list = new ArrayList<>();
 
-    private Button btn_login = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +46,8 @@ public class Activity_MainMenu extends ActionBarActivity{
         openMenuFragment();
 
         initNavigationDrawer();
+
+
 
     }
 

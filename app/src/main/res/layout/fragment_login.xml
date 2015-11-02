@@ -67,14 +67,14 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/btn_google"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:text="@string/btn_facebook_login"/>
+            android:text="@string/btn_google_login"/>
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/btn_facebook"
