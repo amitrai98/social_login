@@ -76,7 +76,7 @@
             android:layout_gravity="center"
             android:text="@string/btn_facebook_login"/>
 
-        <Button
+        <com.facebook.login.widget.LoginButton
             android:id="@+id/btn_facebook"
             android:layout_width="0dp"
             android:layout_weight="1"

@@ -16,6 +16,13 @@ import android.widget.Toast;
 
 import com.example.amitrai.sociallogin.R;
 import com.example.amitrai.sociallogin.activity.Activity_MainMenu;
+import com.example.amitrai.sociallogin.util.AppLoger;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,9 +42,12 @@ public class AppLoginFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Button btn_loging = null,  btn_google = null, btn_facebook = null;
+    private com.facebook.login.widget.LoginButton btn_facebook = null;
+    private Button btn_google = null, btn_loging = null;
     private TextView btn_signup = null ;
     private EditText edt_username, edt_password= null ;
+
+    private final String TAG = AppLoginFragment.class.getSimpleName();
 
     /**
      * Use this factory method to create a new instance of
@@ -61,23 +71,50 @@ public class AppLoginFragment extends Fragment {
     private void initView(View view){
 
         btn_loging = (Button) view.findViewById(R.id.btn_login);
+        btn_facebook = (LoginButton) view.findViewById(R.id.btn_facebook);
+        btn_google = (Button) view.findViewById(R.id.btn_google);
         btn_signup = (TextView) view.findViewById(R.id.btn_signup);
         edt_username = (EditText) view.findViewById(R.id.edt_username);
         edt_password = (EditText) view.findViewById(R.id.edt_password);
+
+        LoginButton loginButton = (LoginButton) view.findViewById(R.id.btn_facebook);
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                AppLoger.e(TAG, "login success");
+            }
+
+            @Override
+            public void onCancel() {
+                AppLoger.e(TAG, "login canceled");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                AppLoger.e(TAG, "an error occured");
+            }
+        });
+
+
+
+//        btn_google.setOnClickListener(this);
+//        btn_facebook.setOnClickListener(this);
+
 
 //        startActivity(new Intent(LoginActivity.this, Activity_MainMenu.class));
 
         btn_loging.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username =edt_username.getText().toString() ;
-                String password =edt_password.getText().toString() ;
-                if(username.length()> 0 && username.equalsIgnoreCase("test") && password.length()>0 && password.equalsIgnoreCase("test")){
+                String username = edt_username.getText().toString();
+                String password = edt_password.getText().toString();
+                if (username.length() > 0 && username.equalsIgnoreCase("test") && password.length() > 0 && password.equalsIgnoreCase("test")) {
 
                     Activity act = getActivity();
                     act.startActivity(new Intent(act, Activity_MainMenu.class));
                     act.finish();
-                }else{
+                } else {
                     Toast.makeText(getActivity(), "Username or password is invalid", Toast.LENGTH_SHORT).show();
 
                 }
@@ -108,6 +145,11 @@ public class AppLoginFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        FacebookSdk.sdkInitialize(getActivity());
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+
+
     }
 
     @Override
@@ -138,6 +180,32 @@ public class AppLoginFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 //        mListener = null;
+    }
+
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()){
+//            case R.id.btn_facebook:
+//
+//                break;
+//            case R.id.btn_google:
+//
+//                break;
+//        }
+//    }
+
+    /**
+     * attempt to login with facebook
+     */
+    private void loginWithFacebook(){
+
+    }
+
+    /**
+     * attempt to login with facebook
+     */
+    private void loginWithGoogle(){
+
     }
 
     /**
