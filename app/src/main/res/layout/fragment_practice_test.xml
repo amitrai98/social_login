@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:entries="@array/array_test"
         android:layout_marginTop="114dp" />
 
     <Spinner
@@ -19,6 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/sp_test"
         android:layout_centerHorizontal="true"
+        android:entries="@array/array_level"
+        android:gravity="center"
         android:layout_marginTop="20dp" />
 
     <Button
@@ -28,6 +31,7 @@
         android:layout_below="@+id/sp_level"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:gravity="center"
         android:text="BEGIN TEST" />
 
 

@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.example.amitrai.sociallogin.R;
 
@@ -18,7 +20,7 @@ import com.example.amitrai.sociallogin.R;
  * Use the {@link QuestionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuestionFragment extends Fragment {
+public class QuestionFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,6 +29,8 @@ public class QuestionFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private CheckBox checkBox_one = null,checkBox_two = null,checkBox_three = null,checkBox_four = null;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +69,33 @@ public class QuestionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_question, container, false);
+        View view =inflater.inflate(R.layout.fragment_question, container, false);
+        initView(view);
+        return view;
+    }
+
+    private void initView(View view){
+        checkBox_one = (CheckBox) view.findViewById(R.id.option_one);
+        checkBox_two = (CheckBox) view.findViewById(R.id.option_two);
+        checkBox_three = (CheckBox) view.findViewById(R.id.option_three);
+        checkBox_four = (CheckBox) view.findViewById(R.id.option_four);
+
+        checkBox_one.setOnCheckedChangeListener(this);
+        checkBox_two.setOnCheckedChangeListener(this);
+        checkBox_three.setOnCheckedChangeListener(this);
+        checkBox_four.setOnCheckedChangeListener(this);
+
+        checkBox_one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ResultFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(fragment.getClass().getSimpleName()).commit();
+
+            }
+        });
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,6 +121,19 @@ public class QuestionFragment extends Fragment {
         super.onDetach();
 //        mListener = null;
     }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        checkBox_one.setChecked(false);
+        checkBox_two.setChecked(false);
+        checkBox_three.setChecked(false);
+        checkBox_four.setChecked(false);
+
+        compoundButton.setChecked(b);
+
+    }
+
+
 
     /**
      * This interface must be implemented by activities that contain this

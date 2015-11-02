@@ -65,7 +65,22 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result, container, false);
+        View view = inflater.inflate(R.layout.fragment_result, container, false);
+
+        initView(view);
+        return view;
+    }
+
+    private void initView(View view){
+        view.findViewById(R.id.id_main_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new Fragment_Menu();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(fragment.getClass().getSimpleName()).commit();
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

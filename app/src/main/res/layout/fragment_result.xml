@@ -54,6 +54,7 @@
 
 
         <Button
+            android:id="@+id/id_main_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"

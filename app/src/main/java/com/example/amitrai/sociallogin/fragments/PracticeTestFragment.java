@@ -12,7 +12,7 @@ import com.example.amitrai.sociallogin.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PracticeTestFragment extends Fragment {
+public class PracticeTestFragment extends Fragment implements View.OnClickListener {
 
 
     public PracticeTestFragment() {
@@ -23,9 +23,24 @@ public class PracticeTestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_practice_test, container, false);
+        View view = inflater.inflate(R.layout.fragment_practice_test, container, false);
+        initView(view);
+        return view;
     }
 
+    private void initView(View view) {
+        view.findViewById(R.id.btn_begintest).setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_begintest:
+                Fragment fragment = new QuestionFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(fragment.getClass().getSimpleName()).commit();
+                break;
+        }
+    }
 }

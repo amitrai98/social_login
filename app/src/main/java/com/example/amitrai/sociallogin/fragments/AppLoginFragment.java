@@ -1,11 +1,14 @@
 package com.example.amitrai.sociallogin.fragments;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,16 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.plus.People;
+import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
+import com.google.android.gms.plus.model.people.PersonBuffer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +44,8 @@ import com.facebook.login.widget.LoginButton;
  * Use the {@link AppLoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AppLoginFragment extends Fragment {
+public class AppLoginFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, ResultCallback<People.LoadPeopleResult> {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -46,6 +60,16 @@ public class AppLoginFragment extends Fragment {
     private Button btn_loging = null;
     private TextView btn_signup = null ;
     private EditText edt_username, edt_password= null ;
+    private GoogleApiClient mGoogleApiClient;
+
+    private boolean mIsResolving = false;
+
+    private ProgressDialog pd = null;
+
+    /* Should we automatically resolve ConnectionResults when possible? */
+    private boolean mShouldResolve = false;
+
+    private int RC_SIGN_IN = 100;
 
 
     private final String TAG = AppLoginFragment.class.getSimpleName();
@@ -69,7 +93,25 @@ public class AppLoginFragment extends Fragment {
     }
 
 
+    /**
+     * attempts google login
+     */
+    private void validateGoogleLogin() {
+        AppLoger.e(TAG, "google clicked");
+        pd.setTitle("Please Wait");
+        pd.setMessage("Please wait...");
+        pd.show();
+        if (mGoogleApiClient.isConnected())
+            mGoogleApiClient.disconnect();
+        else
+            mGoogleApiClient.connect();
+
+    }
+
+
     private void initView(View view){
+
+        pd = new ProgressDialog(getActivity());
 
         btn_loging = (Button) view.findViewById(R.id.btn_login);
         btn_facebook = (LoginButton) view.findViewById(R.id.btn_facebook);
@@ -101,7 +143,12 @@ public class AppLoginFragment extends Fragment {
         });
 
 
-
+        btn_google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateGoogleLogin();
+            }
+        });
 //        btn_google.setOnClickListener(this);
 //        btn_facebook.setOnClickListener(this);
 
@@ -153,8 +200,12 @@ public class AppLoginFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
-
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Plus.API)
+                .addScope(new Scope(Scopes.PROFILE))
+                .build();
 
     }
 
@@ -165,6 +216,12 @@ public class AppLoginFragment extends Fragment {
         View view =inflater.inflate(R.layout.fragment_login, container, false);
         initView(view);
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mGoogleApiClient.disconnect();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -212,6 +269,73 @@ public class AppLoginFragment extends Fragment {
      */
     private void loginWithGoogle(){
 
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Log.e(TAG, "connected" + bundle);
+        if(getActivity() != null && pd != null && pd.isShowing())
+            pd.dismiss();
+        openMainMenu();
+        if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+            Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+            String personName = currentPerson.getDisplayName();
+            String personPhoto = currentPerson.getImage().getUrl();
+            String personGooglePlusProfile = currentPerson.getUrl();
+            String location = currentPerson.getCurrentLocation();
+            openMainMenu();
+            AppLoger.e(TAG, "name " + personName + "/n" + "profile img  " + personPhoto + "/n profile  " + personGooglePlusProfile + "/n location " + location);
+        }
+        Plus.PeopleApi.loadVisible(mGoogleApiClient, null)
+                .setResultCallback(this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        if(getActivity() != null && pd != null && pd.isShowing())
+            pd.dismiss();
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        if(getActivity() != null && pd != null && pd.isShowing())
+            pd.dismiss();
+        if (connectionResult.hasResolution()) {
+            try {
+                connectionResult.startResolutionForResult(getActivity(), RC_SIGN_IN);
+//                    startIntentSenderForResult(connectionResult.getResolution().getIntentSender(), RC_SIGN_IN, null, 0, 0, 0);
+                mIsResolving = true;
+            } catch (IntentSender.SendIntentException e) {
+                Log.e(TAG, "Could not resolve ConnectionResult.", e);
+                mIsResolving = false;
+                mGoogleApiClient.connect();
+            }
+        } else {
+            // Could not resolve the connection result, show the user an
+            // error dialog.
+            Log.e(TAG, "" + connectionResult);
+        }
+//        } else {
+//            // Show the signed-out UI
+//            Log.e(TAG, "signed out");
+//        }
+    }
+
+    @Override
+    public void onResult(People.LoadPeopleResult loadPeopleResult) {
+        if (loadPeopleResult.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
+            PersonBuffer personBuffer = loadPeopleResult.getPersonBuffer();
+            try {
+                int count = personBuffer.getCount();
+                for (int i = 0; i < count; i++) {
+                    Log.d(TAG, "Display name: " + personBuffer.get(i).getDisplayName());
+                }
+            } finally {
+                personBuffer.release();
+            }
+        } else {
+            Log.e(TAG, "Error requesting visible circles: " + loadPeopleResult.getStatus());
+        }
     }
 
     /**

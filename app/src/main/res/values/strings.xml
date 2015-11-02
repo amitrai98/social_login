@@ -66,5 +66,19 @@
     <string name="empty_error">field can\'t be empty</string>
     <string name="invalid_email">Invalid email</string>
 
+    <string-array name="array_test">
+        <item>Test 1</item>
+        <item>Test 2</item>
+        <item>Test 3</item>
+        <item>Test 4</item>
+        <item>Test 5</item>
+    </string-array>
 
+    <string-array name="array_level">
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+    </string-array>
 </resources>
