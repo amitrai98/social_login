@@ -56,23 +56,72 @@ public class Fragment_Menu extends Fragment implements View.OnClickListener{
 
         switch (v.getId()){
             case R.id.btn_online_practice_test:
-
+                openPracticeTest();
                 break;
 
             case R.id.btn_notification:
-
+                openNotification();
                 break;
 
             case R.id.btn_about_us:
-
+                openAboutUs();
                 break;
 
             case R.id.btn_contact_us:
-
+                openContactUs();
                 break;
 
 
         }
 
     }
+
+    /**
+     * opens practice test fragment
+     */
+    private void openPracticeTest(){
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new PracticeTestFragment())
+                .addToBackStack(PracticeTestFragment.class.getSimpleName())
+                .commit();
+    }
+
+    /**
+     * opens notification fragment
+     */
+    private void openNotification(){
+//        getActivity()
+//                .getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.container, new Noti())
+//                .addToBackStack(PracticeTestFragment.class.getSimpleName())
+//                .commit();
+    }
+    /**
+     * opens about us fragment
+     */
+    private void openAboutUs(){
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new AboutUsFragment())
+                .addToBackStack(PracticeTestFragment.class.getSimpleName())
+                .commit();
+    }
+
+    /**
+     * opens practice contact us fragment
+     */
+    private void openContactUs(){
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new ContactUsFragment())
+                .addToBackStack(PracticeTestFragment.class.getSimpleName())
+                .commit();
+    }
+
+
 }

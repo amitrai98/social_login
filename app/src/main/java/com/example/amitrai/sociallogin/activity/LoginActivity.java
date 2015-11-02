@@ -1,23 +1,23 @@
 package com.example.amitrai.sociallogin.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.amitrai.sociallogin.R;
+import com.example.amitrai.sociallogin.fragments.AppLoginFragment;
+import com.example.amitrai.sociallogin.fragments.SignUpFragment;
 import com.example.amitrai.sociallogin.util.AppLoger;
+import com.facebook.login.LoginFragment;
 
 /**
  * Created by cynogen on 25/10/15.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends ActionBarActivity {
 
     // tag to be logged
     private String TAG = LoginActivity.class.getSimpleName();
 
-    private Button btn_loging = null, btn_signup = null, btn_google = null, btn_facebook = null;
 
 
     @Override
@@ -25,26 +25,32 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        btn_loging = (Button) findViewById(R.id.btn_login);
-
-        startActivity(new Intent(LoginActivity.this, Activity_MainMenu.class));
-
-        btn_loging.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, Activity_MainMenu.class));
-            }
-        });
-
+        openLoginFragment();
     }
 
     /**
      *  open login dialog
-     * @param view
      */
-    public void attemptLogin(View view){
-        AppLoger.e(TAG, "login working");
+    private void openLoginFragment(){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new AppLoginFragment())
+                .addToBackStack(LoginFragment.class.getSimpleName())
+                .commit();
     }
+
+    @Override
+    public void onBackPressed() {
+
+        int fragment_count = getSupportFragmentManager().getBackStackEntryCount();
+        if(fragment_count>1){
+            super.onBackPressed();
+        }else{
+            finish();
+        }
+    }
+
+
 
     /**
      * Opens signup dialog
@@ -52,6 +58,12 @@ public class LoginActivity extends Activity {
      */
     public void signUp(View view){
         AppLoger.e(TAG, "signup working");
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new SignUpFragment())
+                .addToBackStack(SignUpFragment.class.getSimpleName())
+                .commit();
+
     }
 
 

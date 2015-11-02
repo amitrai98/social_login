@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
-
 
 import com.example.amitrai.sociallogin.R;
 import com.example.amitrai.sociallogin.adapters.NavigationAdapter;
 import com.example.amitrai.sociallogin.fragments.Fragment_Menu;
-
-import com.example.amitrai.sociallogin.fragments.SignUpFragment;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -37,6 +35,8 @@ public class Activity_MainMenu extends ActionBarActivity{
     private NavigationAdapter adapter = null;
     private List<String> options_list = new ArrayList<>();
 
+    private Button btn_login = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,11 +57,13 @@ public class Activity_MainMenu extends ActionBarActivity{
         drawer_list = (ListView) findViewById(R.id.left_drawer);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        View headerview = getLayoutInflater().inflate(R.layout.design_drawer_header,null);
+
+        View headerview = getLayoutInflater().inflate(R.layout.design_drawer_header, null);
         drawer_list.addHeaderView(headerview);
         adapter = new NavigationAdapter(this, options_list);
         drawer_list.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
 
     }
 
@@ -162,6 +164,16 @@ public class Activity_MainMenu extends ActionBarActivity{
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        int fragment_count = getSupportFragmentManager().getBackStackEntryCount();
+        if(fragment_count>1){
+            super.onBackPressed();
+        }else{
+            finish();
+        }
+    }
 
     private void logOut(){
         startActivity(new Intent(this, LoginActivity.class));
@@ -203,7 +215,7 @@ public class Activity_MainMenu extends ActionBarActivity{
     private void openMenuFragment(){
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container, new SignUpFragment())
+                .add(R.id.container, new Fragment_Menu())
                 .addToBackStack(Fragment_Menu.class.getSimpleName())
                 .commit();
     }

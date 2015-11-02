@@ -1,24 +1,31 @@
 package com.example.amitrai.sociallogin.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.amitrai.sociallogin.R;
+import com.example.amitrai.sociallogin.activity.Activity_MainMenu;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AboutUsFragment.OnFragmentInteractionListener} interface
+ * {@link AppLoginFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link AboutUsFragment#newInstance} factory method to
+ * Use the {@link AppLoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AboutUsFragment extends Fragment {
+public class AppLoginFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,7 +35,9 @@ public class AboutUsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-//    private OnFragmentInteractionListener mListener;
+    private Button btn_loging = null,  btn_google = null, btn_facebook = null;
+    private TextView btn_signup = null ;
+    private EditText edt_username, edt_password= null ;
 
     /**
      * Use this factory method to create a new instance of
@@ -36,11 +45,11 @@ public class AboutUsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AboutUsFragment.
+     * @return A new instance of fragment AppLoginFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AboutUsFragment newInstance(String param1, String param2) {
-        AboutUsFragment fragment = new AboutUsFragment();
+    public static AppLoginFragment newInstance(String param1, String param2) {
+        AppLoginFragment fragment = new AppLoginFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -48,7 +57,47 @@ public class AboutUsFragment extends Fragment {
         return fragment;
     }
 
-    public AboutUsFragment() {
+
+    private void initView(View view){
+
+        btn_loging = (Button) view.findViewById(R.id.btn_login);
+        btn_signup = (TextView) view.findViewById(R.id.btn_signup);
+        edt_username = (EditText) view.findViewById(R.id.edt_username);
+        edt_password = (EditText) view.findViewById(R.id.edt_password);
+
+//        startActivity(new Intent(LoginActivity.this, Activity_MainMenu.class));
+
+        btn_loging.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username =edt_username.getText().toString() ;
+                String password =edt_password.getText().toString() ;
+                if(username.length()> 0 && username.equalsIgnoreCase("test") && password.length()>0 && password.equalsIgnoreCase("test")){
+
+                    Activity act = getActivity();
+                    act.startActivity(new Intent(act, Activity_MainMenu.class));
+                    act.finish();
+                }else{
+                    Toast.makeText(getActivity(), "Username or password is invalid", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+        btn_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActionBarActivity act = (ActionBarActivity) getActivity();
+                act.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, new SignUpFragment())
+                        .addToBackStack(SignUpFragment.class.getSimpleName())
+                        .commit();
+            }
+        });
+    }
+
+    public AppLoginFragment() {
         // Required empty public constructor
     }
 
@@ -65,14 +114,13 @@ public class AboutUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_us, container, false);
+        View view =inflater.inflate(R.layout.fragment_login, container, false);
+        initView(view);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
     }
 
     @Override
