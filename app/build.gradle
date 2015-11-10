@@ -26,8 +26,8 @@ dependencies {
     compile 'com.android.support:design:23.0.0'
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
     compile 'com.google.android.gms:play-services:7.5.0'
-    compile ('com.mikepenz:materialdrawer:4.4.2@aar')
-            {
-                transitive =true
-            }
+    compile('com.mikepenz:materialdrawer:4.4.2@aar') {
+        transitive = true
+    }
+    compile files('libs/gson-2.2.4.jar')
 }
