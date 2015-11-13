@@ -66,6 +66,10 @@
     <string name="empty_error">field can\'t be empty</string>
     <string name="invalid_email">Invalid email</string>
 
+    <string name="error_message_no_internet_connection">No internet connection found.</string>
+
+    <string name="general_error">empty not allowed</string>
+
     <string-array name="array_test">
         <item>Test 1</item>
         <item>Test 2</item>

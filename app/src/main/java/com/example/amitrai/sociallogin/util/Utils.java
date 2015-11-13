@@ -21,4 +21,14 @@ public class Utils {
     public static boolean isMatchedPassword(String firstPassword, String secondPassword) {
         return (firstPassword.trim().equals(secondPassword)) ? true : false;
     }
+
+
+    /**
+     * checks if internet is connected
+     * @return
+     */
+    public static boolean isNetworkConnected(){
+
+        return false;
+    }
 }

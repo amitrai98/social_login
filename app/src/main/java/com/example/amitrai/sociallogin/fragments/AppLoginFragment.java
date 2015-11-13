@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.amitrai.sociallogin.NetworkHandler.AuthorizationHelper;
 import com.example.amitrai.sociallogin.R;
 import com.example.amitrai.sociallogin.activity.Activity_MainMenu;
 import com.example.amitrai.sociallogin.activity.LoginActivity;
@@ -160,12 +161,51 @@ public class AppLoginFragment extends Fragment implements GoogleApiClient.Connec
             public void onClick(View v) {
                 String username = edt_username.getText().toString();
                 String password = edt_password.getText().toString();
-                if (username.length() > 0 && username.equalsIgnoreCase("test") && password.length() > 0 && password.equalsIgnoreCase("test")) {
-                    openMainMenu();
-                } else {
-                    Toast.makeText(getActivity(), "Username or password is invalid", Toast.LENGTH_SHORT).show();
 
+                boolean Cancel = false;
+                View focusView = null;
+
+                edt_username.setError(null);
+                edt_password.setError(null);
+
+                if(username.length()<1){
+                    focusView = edt_username;
+                    edt_username.setError(getString(R.string.general_error));
+                    Cancel =true;
+                }else if(password.length()<1){
+                    focusView = edt_password;
+                    edt_password.setError(getString(R.string.general_error));
+                    Cancel =true;
                 }
+
+                if(Cancel == true){
+                    focusView.requestFocus();
+                    return;
+                }else{
+
+                    AuthorizationHelper.requestLogin(username, password, new AuthorizationHelper.OnLoginCallback() {
+                        @Override
+                        public void onLoggedIn(String token) {
+                            openMainMenu();
+                        }
+                    }, new AuthorizationHelper.OnErrorCallback(){
+
+                        @Override
+                        public void onError(String error) {
+                            AppLoger.e(TAG, error);
+                            Toast.makeText(getActivity(), "Username or password is invalid", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+//                    if (username.length() > 0 && username.equalsIgnoreCase("test") && password.length() > 0 && password.equalsIgnoreCase("test")) {
+//                        openMainMenu();
+//                    } else {
+//                        Toast.makeText(getActivity(), "Username or password is invalid", Toast.LENGTH_SHORT).show();
+//
+//                    }
+                }
+
+
             }
         });
 
