@@ -1,5 +1,9 @@
 package com.example.amitrai.sociallogin.util;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 /**
  * Created by me on 11/1/2015.
  */
@@ -27,8 +31,12 @@ public class Utils {
      * checks if internet is connected
      * @return
      */
-    public static boolean isNetworkConnected(){
-
+    public static boolean isConnectedToNetwork(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            return true;
+        }
         return false;
     }
 }
